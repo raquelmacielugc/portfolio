@@ -273,7 +273,7 @@ section{padding:3.2rem 0}
         <label for="msg">Mensagem</label>
         <textarea id="msg" name="msg" required></textarea>
         <button class="btn" type="submit">Enviar mensagem</button>
-        <p class="ok" id="ok" role="status" tabindex="-1">Mensagem recebida! A Raquel responde em breve.</p>
+        <p class="ok" id="ok" role="status" tabindex="-1">Pronto! Agora é só enviar a mensagem no WhatsApp que abriu.</p>
       </form>
     </div>
     <div class="chan rv">
@@ -306,7 +306,7 @@ section{padding:3.2rem 0}
       <label for="ce">E-mail</label>
       <input id="ce" type="email" autocomplete="email" required>
       <button class="btn" type="submit">Quero receber</button>
-      <p class="ok" id="capOk" role="status">Pronto! Seu pedido foi registrado.</p>
+      <p class="ok" id="capOk" role="status">Pronto! Envie a mensagem no WhatsApp que abriu e eu te mando o mídia kit.</p>
     </form>
   </div>
 </div>
@@ -344,8 +344,8 @@ var METRICAS = [
 
 /* 3 destaques. LINK DO VÍDEO: campo link. CAPA: campo capa (ex.: "capas/reel1.jpg", 9:16). Vazio = bloco de degradê */
 var DESTAQUES = [
-  {link:"https://www.instagram.com/reel/DdfmoRCBE6N/", capa:"", numero:"+23M", rotulo:"views no reels", titulo:"Título do conteúdo 01", contexto:"Marca 01, nicho do vídeo."},
-  {link:"https://www.instagram.com/reel/Dcn3KpMAdvI/", capa:"", numero:"+21M", rotulo:"views no reels", titulo:"Título do conteúdo 02", contexto:"Marca 02, nicho do vídeo."},
+  {link:"https://www.youtube.com/shorts/Sb6qngTUe-U", capa:"", numero:"+23M", rotulo:"views no reels", titulo:"Campanha Mulheres Positivas", contexto:"TIM, tech."},
+  {link:"https://www.youtube.com/shorts/pM-gzvE9eDk", capa:"", numero:"+21M", rotulo:"views no reels", titulo:"Campanha Skincare", contexto:"SKENCE, skincare."},
   {link:"https://www.instagram.com/reel/DeNlbgWAjeu/", capa:"", numero:"+8M", rotulo:"views no reels", titulo:"Título do conteúdo 03", contexto:"Marca 03, nicho do vídeo."}
 ];
 
@@ -492,9 +492,17 @@ $("links").addEventListener("click",function(e){
 });
 
 /* formulário: confirmação na tela. Para receber de verdade, ligue a um serviço de formulários (ex.: Formspree) */
+/* formulários: abrem o WhatsApp da Raquel com a mensagem já escrita */
+function abreWhats(txt){
+  var url = "https://wa.me/"+CONTATO.whats+"?text="+encodeURIComponent(txt);
+  var w = window.open(url,"_blank");
+  if(w) w.opener = null; else location.href = url;
+}
 $("form").addEventListener("submit",function(e){
   e.preventDefault();
   if(!this.checkValidity()){this.reportValidity();return}
+  var txt = "Oi, Raquel! Vim pelo seu portfólio.\n\nNome: "+$("nome").value+"\nE-mail: "+$("email").value+"\n\n"+$("msg").value;
+  abreWhats(txt);
   $("ok").classList.add("show"); $("ok").focus(); this.reset();
 });
 
@@ -533,6 +541,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape") fecha()});
 $("capForm").addEventListener("submit",function(e){
   e.preventDefault();
   if(!this.checkValidity()){this.reportValidity();return}
+  abreWhats("Oi, Raquel! Quero receber o seu mídia kit completo.\n\nNome: "+$("cn").value+"\nE-mail: "+$("ce").value);
   $("capOk").classList.add("show"); this.reset();
 });
 </script>
