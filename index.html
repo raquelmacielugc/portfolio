@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#e8e9f1;--ink:#2d2d5b;--m:#8db4ff;--w:#fafaff}
+:root{--bg:#f5efeb;--ink:#5e1526;--m:#e8cdc6;--w:#fffcfa}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
-body{font-family:'Archivo',Arial,sans-serif;color:var(--ink);background-color:var(--bg);background-image:linear-gradient(rgba(45,45,91,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(45,45,91,.09) 1px,transparent 1px);background-size:28px 28px;line-height:1.6;font-size:1.05rem;overflow-x:hidden}
+body{font-family:'Archivo',Arial,sans-serif;color:var(--ink);background-color:var(--bg);background-image:linear-gradient(rgba(94,21,38,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(94,21,38,.07) 1px,transparent 1px);background-size:28px 28px;line-height:1.6;font-size:1.05rem;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px;box-shadow:0 0 0 6px var(--m)}
@@ -22,13 +22,13 @@ mark{background:var(--m);color:var(--ink);padding:0 .18em;box-decoration-break:c
 .wrap{width:min(1120px,100% - 2.5rem);margin:0 auto}
 section{padding:4.5rem 0}
 .thin{display:flex;justify-content:center;flex-wrap:wrap;gap:.2rem 1.6rem;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;padding:.5rem 1rem;border-bottom:1px solid var(--ink)}
-.btn{display:inline-block;font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:.9rem;letter-spacing:.04em;text-decoration:none;text-align:center;padding:.9rem 1.4rem;border:3px solid var(--ink);background:var(--m);color:var(--ink);box-shadow:5px 5px 0 var(--ink);cursor:pointer;transition:transform .15s,box-shadow .15s}
-.btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--ink)}
-.btn.alt{background:var(--w)}
+.btn{display:inline-block;font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:.9rem;letter-spacing:.04em;text-decoration:none;text-align:center;padding:.9rem 1.4rem;border:3px solid var(--ink);background:var(--ink);color:var(--w);box-shadow:5px 5px 0 var(--m);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--m)}
+.btn.alt{background:var(--w);color:var(--ink);box-shadow:5px 5px 0 var(--ink)}
 /* contagem regressiva da Black Friday */
-.bf{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.4rem .9rem;background:var(--m);border-bottom:3px solid var(--ink);padding:.7rem 1rem;font-family:'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-size:1rem;text-align:center}
+.bf{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.4rem .9rem;background:var(--ink);color:var(--w);border-bottom:3px solid var(--ink);padding:.7rem 1rem;font-family:'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-size:1rem;text-align:center}
 .bf[hidden]{display:none}
-.bf-n{background:var(--w);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:0 .6rem;font-size:1.5rem;line-height:1.3}
+.bf-n{background:var(--w);color:var(--ink);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:0 .6rem;font-size:1.5rem;line-height:1.3}
 /* menu */
 header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:3px solid var(--ink)}
 nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 0}
@@ -49,7 +49,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;paddi
 /* fotos: recorte branco girado com sombra dura. A foto aparece inteira, sem corte */
 .photo{background:var(--w);padding:.8rem .8rem 2.4rem;border:2px solid var(--ink);box-shadow:9px 9px 0 var(--ink);transform:rotate(-3deg);max-width:300px;margin:0 auto;position:relative}
 .photo img{width:100%;height:auto}
-.ph{display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;background:linear-gradient(135deg,#dfe6fb,#a9bdf0 55%,#7a8fd6)}
+.ph{display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;background:linear-gradient(135deg,#f3e3de,#d9aaa6 55%,#8f3a4a)}
 .photo .ph{aspect-ratio:4/5}
 .band{background:var(--w);border-block:3px solid var(--ink);padding:.9rem 0}
 .band-t{font-family:'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:.22em;font-size:.8rem;text-align:center;margin-bottom:.9rem}
@@ -69,7 +69,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;paddi
 .hl{display:block;text-decoration:none;background:var(--w);border:3px solid var(--ink);box-shadow:7px 7px 0 var(--ink);transition:transform .15s,box-shadow .15s}
 .hl:hover{transform:translate(3px,3px);box-shadow:4px 4px 0 var(--ink)}
 .cover{position:relative;aspect-ratio:9/16;border-bottom:3px solid var(--ink);overflow:hidden}
-.cover img{width:100%;height:100%;object-fit:cover}
+.cover img{width:100%;height:100%;object-fit:cover;color:transparent;background:linear-gradient(135deg,#f3e3de,#d9aaa6 55%,#8f3a4a)}
 .cover .ph{height:100%;aspect-ratio:auto}
 .play{position:absolute;left:50%;top:50%;width:74px;height:74px;margin:-37px 0 0 -37px;border-radius:50%;background:var(--m);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
 .play::after{content:"";position:absolute;left:29px;top:21px;border-left:22px solid var(--ink);border-top:15px solid transparent;border-bottom:15px solid transparent}
@@ -108,9 +108,10 @@ a.work:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
 .card p{font-size:.95rem}
 /* numeros */
 .mets{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-bottom:2.4rem}
-.met{background:var(--m);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:1.2rem;text-align:center}
-.met b{display:block;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1}
+.met{background:var(--ink);color:var(--w);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:1.2rem;text-align:center}
+.met b{color:var(--w);display:block;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1}
 .met span{font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+.met b span,.stat b span{font-size:inherit;letter-spacing:0;text-transform:none}
 .tests{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem}
 blockquote{background:var(--w);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:1.4rem}
 blockquote p{font-weight:600;margin-bottom:.9rem}
@@ -131,7 +132,7 @@ footer.site{border-top:3px solid var(--ink);padding:2rem 0 1.5rem;text-align:cen
 footer.site .name{font-family:'Archivo Black',sans-serif;font-size:1.6rem;text-transform:uppercase}
 footer.site ul{list-style:none;display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem 1.5rem;margin:.8rem 0}
 /* captura */
-.ov{position:fixed;inset:0;background:rgba(35,35,74,.78);display:none;align-items:center;justify-content:center;padding:1rem;z-index:100}
+.ov{position:fixed;inset:0;background:rgba(60,12,24,.8);display:none;align-items:center;justify-content:center;padding:1rem;z-index:100}
 .ov.open{display:flex}
 .pop{background:var(--bg);border:3px solid var(--ink);box-shadow:9px 9px 0 var(--m);padding:2rem 1.5rem 1.5rem;width:min(440px,100%);position:relative;max-height:92vh;overflow:auto}
 .pop h2{font-size:1.8rem;margin-bottom:.6rem}
@@ -430,7 +431,7 @@ $("hlGrid").innerHTML = DESTAQUES.map(function(d){
   return '<a class="hl rv" href="'+d.link+'" target="_blank" rel="noopener" aria-label="Abrir o vídeo: '+d.titulo+'"><div class="cover">'+capa+'<span class="play" aria-hidden="true"></span></div><div class="hl-body"><div class="big">'+d.numero+'</div><div class="big-l">'+d.rotulo+'</div><h3>'+d.titulo+'</h3><p>'+d.contexto+'</p></div></a>';
 }).join("");
 
-var cores = ["#dfe6fb,#8da2e0","#8db4ff,#4f5aa8","#cfd0e6,#6c70b0","#a9c0ff,#5b6bb5","#bfc4ee,#3a3a6e","#d6defa,#7a8fd6"];
+var cores = ["#f3e3de,#c98f8f","#e8cdc6,#8f3a4a","#ece4df,#a8848a","#ddb8b2,#7a2335","#e6d6cf,#5e1526","#f5ebe7,#b5707a"];
 /* vídeos: cada card tem botão de play, abre o Short do YouTube ao clicar e mostra só o título embaixo (ex.: Moda 01) e a marca como etiqueta em cima do vídeo (campo marca; "Sua marca" não aparece) */
 function desenhaGaleria(filtro){
   var lista = TRABALHOS.filter(function(t){return filtro==="Todos"||t.nicho===filtro});
@@ -439,7 +440,7 @@ function desenhaGaleria(filtro){
     var grad = cores[NICHOS.indexOf(t.nicho)%cores.length];
     var video = !!t.link;
     var yt = ytId(t.link);
-    var bloco = t.img ? '<img src="'+t.img+'" alt="'+t.titulo+' para '+t.marca+'" loading="lazy" style="aspect-ratio:4/5;object-fit:cover">' : yt ? '<img src="https://i.ytimg.com/vi/'+yt+'/oardefault.jpg" onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/'+yt+'/hqdefault.jpg\'" alt="Capa do vídeo: '+t.titulo+'" loading="lazy" style="aspect-ratio:4/5;object-fit:cover">' : '<div class="ph" style="background:linear-gradient(135deg,'+grad+')" role="img" aria-label="Espaço reservado para '+t.titulo+'">'+(video?'':'foto ou vídeo 4:5')+'</div>';
+    var bloco = t.img ? '<img src="'+t.img+'" alt="'+t.titulo+' para '+t.marca+'" loading="lazy" style="aspect-ratio:4/5;object-fit:cover">' : yt ? '<img src="https://i.ytimg.com/vi/'+yt+'/oardefault.jpg" onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/'+yt+'/hqdefault.jpg\'" alt="Capa do vídeo: '+t.titulo+'" loading="lazy" style="display:block;width:100%;aspect-ratio:4/5;object-fit:cover;color:transparent;background:linear-gradient(135deg,'+grad+')">' : '<div class="ph" style="background:linear-gradient(135deg,'+grad+')" role="img" aria-label="Espaço reservado para '+t.titulo+'">'+(video?'':'foto ou vídeo 4:5')+'</div>';
     var legenda = video ? '<div class="t"><b>'+t.titulo+'</b></div>' : '<div class="t"><b>'+t.titulo+'</b><span>'+t.nicho+', '+t.marca+'</span></div>';
     var etiqueta = (video && t.marca && t.marca!=="Sua marca") ? '<span class="tag">'+t.marca+'</span>' : '';
     var corpo = (video?'<div class="thumb">'+bloco+etiqueta+'<span class="play" aria-hidden="true"></span></div>':bloco)+legenda;
