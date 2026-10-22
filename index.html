@@ -346,7 +346,7 @@ var METRICAS = [
 var DESTAQUES = [
   {link:"https://www.youtube.com/shorts/Sb6qngTUe-U", capa:"", numero:"+23M", rotulo:"views no reels", titulo:"Campanha Mulheres Positivas", contexto:"TIM, tech."},
   {link:"https://www.youtube.com/shorts/pM-gzvE9eDk", capa:"", numero:"+21M", rotulo:"views no reels", titulo:"Campanha Skincare", contexto:"SKENCE, skincare."},
-  {link:"https://www.instagram.com/reel/DeNlbgWAjeu/", capa:"", numero:"+8M", rotulo:"views no reels", titulo:"Título do conteúdo 03", contexto:"Marca 03, nicho do vídeo."}
+  {link:"https://www.instagram.com/reel/DeNlbgWAjeu/", capa:"", numero:"+8M", rotulo:"views no reels", titulo:"Sacola surpresa O Boticário", contexto:"O Boticário, beleza."}
 ];
 
 /* Nichos (botões de filtro) */
@@ -422,8 +422,11 @@ $("heroStats").innerHTML = METRICAS.slice(0,3).map(function(m){return '<div clas
 [].forEach.call(document.querySelectorAll("[data-foto]"),function(i){i.src=FOTOS[i.dataset.foto]||i.dataset.foto});
 $("brands").innerHTML = MARCAS.map(function(b){return "<li>"+(b.logo?'<img src="'+(LOGOS[b.logo]||b.logo)+'" alt="Logo '+b.nome+'" loading="lazy">':b.nome)+"</li>"}).join("");
 
+/* sem capa definida: usa a miniatura do próprio vídeo do YouTube */
+function ytId(link){var m = /(?:shorts\/|youtu\.be\/|[?&]v=)([\w-]{11})/.exec(link||""); return m ? m[1] : ""}
 $("hlGrid").innerHTML = DESTAQUES.map(function(d){
-  var capa = d.capa ? '<img src="'+d.capa+'" alt="Capa do vídeo: '+d.titulo+'" loading="lazy">' : '<div class="ph" role="img" aria-label="Espaço reservado para a capa do vídeo">capa do vídeo 9:16</div>';
+  var yt = ytId(d.link);
+  var capa = d.capa ? '<img src="'+d.capa+'" alt="Capa do vídeo: '+d.titulo+'" loading="lazy">' : yt ? '<img src="https://i.ytimg.com/vi/'+yt+'/oardefault.jpg" onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/'+yt+'/hqdefault.jpg\'" alt="Capa do vídeo: '+d.titulo+'" loading="lazy">' : '<div class="ph" role="img" aria-label="Espaço reservado para a capa do vídeo">capa do vídeo 9:16</div>';
   return '<a class="hl rv" href="'+d.link+'" target="_blank" rel="noopener" aria-label="Abrir o vídeo: '+d.titulo+'"><div class="cover">'+capa+'<span class="play" aria-hidden="true"></span></div><div class="hl-body"><div class="big">'+d.numero+'</div><div class="big-l">'+d.rotulo+'</div><h3>'+d.titulo+'</h3><p>'+d.contexto+'</p></div></a>';
 }).join("");
 
