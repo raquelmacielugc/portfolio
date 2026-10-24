@@ -76,6 +76,9 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;paddi
 .about p{margin-bottom:1.1rem;max-width:36rem}
 .promises{list-style:none;margin:1.4rem 0}
 .promises li{padding:.6rem 0 .6rem 2.2rem;border-bottom:2px dashed var(--ink);position:relative;font-weight:600}
+.facts{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:-1rem 0 1.4rem}
+.facts li{background:var(--w);border:2px solid var(--ink);border-radius:999px;box-shadow:2px 2px 0 var(--ink);padding:.2rem .85rem;font-weight:700;font-size:.85rem}
+.facts li:first-child{background:var(--c);color:var(--w)}
 .promises li::before{content:"✓";position:absolute;left:0;top:.5rem;background:var(--m);border:2px solid var(--ink);width:1.5rem;height:1.5rem;display:grid;place-items:center;font-size:.85rem}
 .sign{font-family:'Archivo Black',sans-serif;font-size:1.8rem;transform:rotate(-2deg);display:inline-block;margin-top:.6rem}
 /* destaques */
@@ -229,8 +232,15 @@ section{padding:3.2rem 0}
     </figure>
     <div class="rv">
       <h2>Quem vai <mark>criar</mark> com você?</h2>
-      <p>Oi, eu sou a Raquel, de Mogi das Cruzes. Eu transformo o produto da sua marca em vídeo natural, do jeito que a gente vê no feed de verdade, e com estratégia por trás de cada cena.</p>
-      <p>Eu atendo beleza, skincare, casa e decoração, fitness, tech e moda. Gosto de entender a sua campanha antes de apertar o botão de gravar.</p>
+      <ul class="facts">
+        <li>26 anos</li>
+        <li>Cearense em Mogi das Cruzes</li>
+        <li>Engenheira + UGC Creator</li>
+      </ul>
+      <p>Oi, eu sou a Raquel! Tenho 26 anos, sou natural do Ceará e moro em Mogi das Cruzes. Sou engenheira e UGC Creator, e é justamente essa mistura que deixa o meu conteúdo diferente.</p>
+      <p>Da engenharia eu trouxe o método: antes de gravar, eu estudo o produto, o público e o objetivo da campanha, e cada cena tem um porquê. Da criatividade vem o resto: ideias fora do óbvio, ganchos que prendem nos primeiros segundos e aquele jeito leve de mostrar o produto como quem indica para uma amiga.</p>
+      <p>Eu crio porque acredito que a melhor propaganda é a que não parece propaganda. Quero que quem assiste sinta que está recebendo uma recomendação sincera, porque é isso que gera confiança e faz vender.</p>
+      <p>Atendo beleza, skincare, casa e decoração, fitness, tech e moda.</p>
       <ul class="promises">
         <li>Roteiro aprovado antes de gravar</li>
         <li>Uma rodada de ajuste inclusa</li>
