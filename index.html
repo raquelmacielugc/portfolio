@@ -211,7 +211,7 @@ section{padding:3.2rem 0}
       <p class="lead">Conteúdo natural e estratégico, em vídeos que parecem conversa e vendem como anúncio.</p>
       <div class="cta">
         <a class="btn" href="#contato">Falar comigo</a>
-        <a class="btn alt" href="#trabalhos">Ver os trabalhos</a>
+        <a class="btn alt" href="#trabalhos">Ver meus trabalhos</a>
       </div>
     </div>
     <figure class="photo">
@@ -444,10 +444,15 @@ function marcasHTML(copia){return MARCAS.map(function(b){return "<li"+(copia?' a
 $("brands").innerHTML = marcasHTML(false)+marcasHTML(true);
 
 /* sem capa definida: usa a miniatura do próprio vídeo do YouTube */
+/* nem todo Short tem a miniatura vertical (oardefault); quando falta, o YouTube manda uma imagem cinza de 120x90, então troca pela miniatura padrão */
+function capaYT(img,erro){
+  if(img.dataset.trocou) return;
+  if(erro || img.naturalWidth<=120){img.dataset.trocou = 1; img.src = "https://i.ytimg.com/vi/"+img.dataset.yt+"/hqdefault.jpg"}
+}
 function ytId(link){var m = /(?:shorts\/|youtu\.be\/|[?&]v=)([\w-]{11})/.exec(link||""); return m ? m[1] : ""}
 $("hlGrid").innerHTML = DESTAQUES.map(function(d){
   var yt = ytId(d.link);
-  var capa = d.capa ? '<img src="'+d.capa+'" alt="Capa do vídeo: '+d.titulo+'" loading="lazy">' : yt ? '<img src="https://i.ytimg.com/vi/'+yt+'/oardefault.jpg" onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/'+yt+'/hqdefault.jpg\'" alt="Capa do vídeo: '+d.titulo+'" loading="lazy">' : '<div class="ph" role="img" aria-label="Espaço reservado para a capa do vídeo">capa do vídeo 9:16</div>';
+  var capa = d.capa ? '<img src="'+d.capa+'" alt="Capa do vídeo: '+d.titulo+'" loading="lazy">' : yt ? '<img src="https://i.ytimg.com/vi/'+yt+'/oardefault.jpg" onload="capaYT(this)" onerror="capaYT(this,1)" data-yt="'+yt+'" alt="Capa do vídeo: '+d.titulo+'" loading="lazy">' : '<div class="ph" role="img" aria-label="Espaço reservado para a capa do vídeo">capa do vídeo 9:16</div>';
   return '<a class="hl rv" href="'+d.link+'" target="_blank" rel="noopener" aria-label="Abrir o vídeo: '+d.titulo+'"><div class="cover">'+capa+'<span class="play" aria-hidden="true"></span></div><div class="hl-body"><div class="big">'+d.numero+'</div><div class="big-l">'+d.rotulo+'</div><h3>'+d.titulo+'</h3><p>'+d.contexto+'</p></div></a>';
 }).join("");
 
@@ -460,7 +465,7 @@ function desenhaGaleria(filtro){
     var grad = cores[NICHOS.indexOf(t.nicho)%cores.length];
     var video = !!t.link;
     var yt = ytId(t.link);
-    var bloco = t.img ? '<img src="'+t.img+'" alt="'+t.titulo+' para '+t.marca+'" loading="lazy" style="aspect-ratio:4/5;object-fit:cover">' : yt ? '<img src="https://i.ytimg.com/vi/'+yt+'/oardefault.jpg" onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/'+yt+'/hqdefault.jpg\'" alt="Capa do vídeo: '+t.titulo+'" loading="lazy" style="display:block;width:100%;aspect-ratio:4/5;object-fit:cover;color:transparent;background:linear-gradient(135deg,'+grad+')">' : '<div class="ph" style="background:linear-gradient(135deg,'+grad+')" role="img" aria-label="Espaço reservado para '+t.titulo+'">'+(video?'':'foto ou vídeo 4:5')+'</div>';
+    var bloco = t.img ? '<img src="'+t.img+'" alt="'+t.titulo+' para '+t.marca+'" loading="lazy" style="aspect-ratio:4/5;object-fit:cover">' : yt ? '<img src="https://i.ytimg.com/vi/'+yt+'/oardefault.jpg" onload="capaYT(this)" onerror="capaYT(this,1)" data-yt="'+yt+'" alt="Capa do vídeo: '+t.titulo+'" loading="lazy" style="display:block;width:100%;aspect-ratio:4/5;object-fit:cover;color:transparent;background:linear-gradient(135deg,'+grad+')">' : '<div class="ph" style="background:linear-gradient(135deg,'+grad+')" role="img" aria-label="Espaço reservado para '+t.titulo+'">'+(video?'':'foto ou vídeo 4:5')+'</div>';
     var nome = (t.marca && t.marca!=="Sua marca") ? t.marca+(t.desc?" - "+t.desc:"") : t.titulo;
     var legenda = video ? '<div class="cap"><b>'+nome+'</b><span class="pill">'+t.nicho+'</span></div>' : '<div class="t"><b>'+t.titulo+'</b><span>'+t.nicho+', '+t.marca+'</span></div>';
     var corpo = video ? '<div class="thumb">'+bloco+'<span class="play" aria-hidden="true"></span>'+legenda+'</div>' : bloco+legenda;
@@ -536,7 +541,7 @@ function anima(el){
   if(reduz){el.textContent = pre+n+suf; return}
   function passo(t){
     if(!t0) t0 = t;
-    var p = Math.min((t-t0)/1400,1);
+    var p = Math.min((t-t0)/1600,1);
     el.textContent = pre+Math.round(n*(1-Math.pow(1-p,3)))+suf;
     if(p<1) requestAnimationFrame(passo);
   }
@@ -546,12 +551,21 @@ var obs = new IntersectionObserver(function(es){
   es.forEach(function(e){
     if(!e.isIntersecting) return;
     e.target.classList.add("in");
-    [].forEach.call(e.target.querySelectorAll("[data-n]"),anima);
+    if(!e.target.classList.contains("met")) [].forEach.call(e.target.querySelectorAll("[data-n]"),anima);
     obs.unobserve(e.target);
   });
 },{threshold:.15});
 [].forEach.call(document.querySelectorAll(".rv"),function(el){obs.observe(el)});
-[].forEach.call(document.querySelectorAll(".stat"),function(el){obs.observe(el)});
+/* métricas: só começam a contar quando o quadro já está bem visível e terminou de aparecer */
+var obsMet = new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(!e.isIntersecting) return;
+    var el = e.target.querySelector("[data-n]");
+    setTimeout(function(){anima(el)}, reduz?0:350);
+    obsMet.unobserve(e.target);
+  });
+},{threshold:.6});
+[].forEach.call(document.querySelectorAll(".met"),function(el){obsMet.observe(el)});
 
 /* card de captura: 7 segundos, uma vez por visita */
 var ov = $("ov");
