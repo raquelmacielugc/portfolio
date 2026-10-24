@@ -103,6 +103,11 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;paddi
 a.work{display:block;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s}
 a.work:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
 .thumb{position:relative}
+/* legenda por cima do vídeo: marca em destaque e o nicho numa pílula logo abaixo */
+.thumb img,.thumb .ph{border-bottom:0}
+.cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:3rem .85rem .85rem;background:linear-gradient(transparent,rgba(40,8,16,.88));color:#fff}
+.work .cap b{font-family:'Archivo',sans-serif;font-weight:700;text-transform:none;font-size:1.05rem;line-height:1.2;margin-bottom:.45rem;color:#fff}
+.work .cap .pill{display:inline-block;background:rgba(0,0,0,.45);color:#fff;border-radius:999px;padding:.2rem .8rem;font-size:.8rem;text-transform:lowercase}
 .tag{position:absolute;left:.6rem;top:.6rem;z-index:2;background:var(--w);color:var(--ink);border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);padding:.1rem .6rem;font-family:'Archivo Black',sans-serif;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;line-height:1.5}
 .work .play{width:56px;height:56px;margin:-28px 0 0 -28px;box-shadow:3px 3px 0 var(--ink)}
 .work .play::after{left:22px;top:15px;border-left:17px solid var(--ink);border-top:12px solid transparent;border-bottom:12px solid transparent}
@@ -359,7 +364,7 @@ var DESTAQUES = [
 /* Nichos (botões de filtro) */
 var NICHOS = ["Beleza","Skincare","Casa e decoração","Fitness","Tech","Moda"];
 
-/* Trabalhos: cada um pertence a um nicho. link = endereço do vídeo (Short do YouTube ou arquivo do Google Drive; no Drive, a pasta precisa estar compartilhada como "qualquer pessoa com o link") (abre ao clicar no card; embaixo aparece só o título). Sem link, o card é foto com legenda (img = caminho da imagem, marca = nome da marca) */
+/* Trabalhos: cada um pertence a um nicho. desc (opcional) = descrição curta que aparece depois da marca, ex.: desc:"lançamento Ultra Bond Reset" vira "Eudora - lançamento Ultra Bond Reset". link = endereço do vídeo (Short do YouTube ou arquivo do Google Drive; no Drive, a pasta precisa estar compartilhada como "qualquer pessoa com o link") (abre ao clicar no card; embaixo aparece só o título). Sem link, o card é foto com legenda (img = caminho da imagem, marca = nome da marca) */
 var TRABALHOS = [
   {nicho:"Beleza", titulo:"Beleza 01", marca:"Eudora", img:"", link:"https://www.youtube.com/shorts/uK3m-1QKGOE"},
   {nicho:"Beleza", titulo:"Beleza 02", marca:"Lowell", img:"", link:"https://www.youtube.com/shorts/MDaCfa7gcyE"},
@@ -443,10 +448,10 @@ function desenhaGaleria(filtro){
     var video = !!t.link;
     var yt = ytId(t.link);
     var bloco = t.img ? '<img src="'+t.img+'" alt="'+t.titulo+' para '+t.marca+'" loading="lazy" style="aspect-ratio:4/5;object-fit:cover">' : yt ? '<img src="https://i.ytimg.com/vi/'+yt+'/oardefault.jpg" onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/'+yt+'/hqdefault.jpg\'" alt="Capa do vídeo: '+t.titulo+'" loading="lazy" style="display:block;width:100%;aspect-ratio:4/5;object-fit:cover;color:transparent;background:linear-gradient(135deg,'+grad+')">' : '<div class="ph" style="background:linear-gradient(135deg,'+grad+')" role="img" aria-label="Espaço reservado para '+t.titulo+'">'+(video?'':'foto ou vídeo 4:5')+'</div>';
-    var legenda = video ? '<div class="t"><b>'+t.titulo+'</b></div>' : '<div class="t"><b>'+t.titulo+'</b><span>'+t.nicho+', '+t.marca+'</span></div>';
-    var etiqueta = (video && t.marca && t.marca!=="Sua marca") ? '<span class="tag">'+t.marca+'</span>' : '';
-    var corpo = (video?'<div class="thumb">'+bloco+etiqueta+'<span class="play" aria-hidden="true"></span></div>':bloco)+legenda;
-    return video ? '<a class="work" href="'+t.link+'" target="_blank" rel="noopener" aria-label="Abrir o vídeo: '+t.titulo+'">'+corpo+'</a>' : '<article class="work">'+corpo+'</article>';
+    var nome = (t.marca && t.marca!=="Sua marca") ? t.marca+(t.desc?" - "+t.desc:"") : t.titulo;
+    var legenda = video ? '<div class="cap"><b>'+nome+'</b><span class="pill">'+t.nicho+'</span></div>' : '<div class="t"><b>'+t.titulo+'</b><span>'+t.nicho+', '+t.marca+'</span></div>';
+    var corpo = video ? '<div class="thumb">'+bloco+'<span class="play" aria-hidden="true"></span>'+legenda+'</div>' : bloco+legenda;
+    return video ? '<a class="work" href="'+t.link+'" target="_blank" rel="noopener" aria-label="Abrir o vídeo: '+nome+', '+t.nicho+'">'+corpo+'</a>' : '<article class="work">'+corpo+'</article>';
   }).join("");
 }
 $("filters").innerHTML = ["Todos"].concat(NICHOS).map(function(n,i){return '<button type="button" aria-pressed="'+(i===0)+'" data-f="'+n+'">'+n+'</button>'}).join("");
