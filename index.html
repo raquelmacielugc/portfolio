@@ -39,7 +39,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;paddi
 .burger{display:none;background:var(--m);border:3px solid var(--ink);padding:.45rem .6rem;cursor:pointer;font:inherit;font-weight:700;color:var(--ink)}
 /* capa */
 .hero{padding:3rem 0 3.5rem}
-.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:2.5rem;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:center}
 .hero h1{font-size:clamp(3rem,11vw,7.6rem);margin-bottom:1.2rem}
 .hero p.lead{font-size:1.25rem;max-width:34rem;margin-bottom:1.6rem;font-weight:600}
 .cta{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
@@ -49,6 +49,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;paddi
 /* fotos: recorte branco girado com sombra dura. A foto aparece inteira, sem corte */
 .photo{background:var(--w);padding:.8rem .8rem 2.4rem;border:2px solid var(--ink);box-shadow:9px 9px 0 var(--ink);transform:rotate(-3deg);max-width:300px;margin:0 auto;position:relative}
 .photo img{width:100%;height:auto}
+.hero .photo{max-width:min(390px,82vw)}
 .ph{display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;background:linear-gradient(135deg,#f3e3de,#d9aaa6 55%,#8f3a4a)}
 .photo .ph{aspect-ratio:4/5}
 .band{background:var(--w);border-block:3px solid var(--ink);padding:.9rem 0}
@@ -200,7 +201,6 @@ section{padding:3.2rem 0}
         <a class="btn" href="#contato">Falar comigo</a>
         <a class="btn alt" href="#trabalhos">Ver os trabalhos</a>
       </div>
-      <div class="stats" id="heroStats"></div>
     </div>
     <figure class="photo">
       <!-- FOTO DA CAPA: já embutida no arquivo. Para trocar, mande a nova foto ou troque o src por um caminho, ex.: "fotos/capa.jpg" (a foto aparece inteira, sem corte) -->
@@ -426,7 +426,6 @@ var reduz = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function metricaHTML(m){return '<span data-n="'+m.n+'" data-pre="'+m.pre+'" data-suf="'+m.suf+'">'+m.pre+(reduz?m.n:0)+m.suf+'</span>'}
 
-$("heroStats").innerHTML = METRICAS.slice(0,3).map(function(m){return '<div class="stat"><b>'+metricaHTML(m)+'</b><span>'+m.rotulo+'</span></div>'}).join("");
 [].forEach.call(document.querySelectorAll("[data-foto]"),function(i){i.src=FOTOS[i.dataset.foto]||i.dataset.foto});
 function marcasHTML(copia){return MARCAS.map(function(b){return "<li"+(copia?' aria-hidden="true"':"")+">"+(b.logo?'<img src="'+(LOGOS[b.logo]||b.logo)+'" alt="'+(copia?"":"Logo "+b.nome)+'">':b.nome)+"</li>"}).join("")}
 $("brands").innerHTML = marcasHTML(false)+marcasHTML(true);
