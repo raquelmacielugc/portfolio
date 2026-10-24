@@ -54,6 +54,13 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;paddi
 .band{background:var(--w);border-block:3px solid var(--ink);padding:.9rem 0}
 .band-t{font-family:'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:.22em;font-size:.8rem;text-align:center;margin-bottom:.9rem}
 .band ul{list-style:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.8rem 2.2rem;font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:.85rem}
+/* faixa de marcas passando como anúncio: a lista vai duplicada e anda metade do caminho, então o loop não tem emenda */
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee ul{flex-wrap:nowrap;justify-content:flex-start;gap:0;width:max-content;animation:rola 32s linear infinite}
+.marquee li{flex:none;padding:0 2.75rem;display:flex;align-items:center}
+.marquee:hover ul{animation-play-state:paused}
+@keyframes rola{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee{-webkit-mask-image:none;mask-image:none}.marquee ul{animation:none;flex-wrap:wrap;justify-content:center;width:auto;gap:.8rem 0}.marquee li[aria-hidden]{display:none}}
 .band img{height:46px;width:auto;max-width:150px;object-fit:contain}
 /* sobre */
 .about{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem;align-items:center}
@@ -201,7 +208,7 @@ section{padding:3.2rem 0}
     </figure>
   </div>
 </section>
-<div class="band" aria-label="Marcas atendidas"><div class="wrap"><p class="band-t">Marcas trabalhadas</p><ul id="brands"></ul></div></div>
+<div class="band" aria-label="Marcas atendidas"><div class="wrap"><p class="band-t">Marcas trabalhadas</p></div><div class="marquee"><ul id="brands"></ul></div></div>
 
 <section id="sobre">
   <div class="wrap about">
@@ -421,7 +428,8 @@ function metricaHTML(m){return '<span data-n="'+m.n+'" data-pre="'+m.pre+'" data
 
 $("heroStats").innerHTML = METRICAS.slice(0,3).map(function(m){return '<div class="stat"><b>'+metricaHTML(m)+'</b><span>'+m.rotulo+'</span></div>'}).join("");
 [].forEach.call(document.querySelectorAll("[data-foto]"),function(i){i.src=FOTOS[i.dataset.foto]||i.dataset.foto});
-$("brands").innerHTML = MARCAS.map(function(b){return "<li>"+(b.logo?'<img src="'+(LOGOS[b.logo]||b.logo)+'" alt="Logo '+b.nome+'" loading="lazy">':b.nome)+"</li>"}).join("");
+function marcasHTML(copia){return MARCAS.map(function(b){return "<li"+(copia?' aria-hidden="true"':"")+">"+(b.logo?'<img src="'+(LOGOS[b.logo]||b.logo)+'" alt="'+(copia?"":"Logo "+b.nome)+'">':b.nome)+"</li>"}).join("")}
+$("brands").innerHTML = marcasHTML(false)+marcasHTML(true);
 
 /* sem capa definida: usa a miniatura do próprio vídeo do YouTube */
 function ytId(link){var m = /(?:shorts\/|youtu\.be\/|[?&]v=)([\w-]{11})/.exec(link||""); return m ? m[1] : ""}
