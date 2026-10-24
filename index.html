@@ -306,6 +306,7 @@ section{padding:3.2rem 0}
       <a class="btn" id="wa" href="#">WhatsApp</a>
       <a class="btn alt" id="mail" href="#">E-mail</a>
       <a class="btn alt" id="ig" href="#" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn alt" id="tt" href="#" target="_blank" rel="noopener">TikTok</a>
     </div>
   </div>
 </section>
@@ -343,7 +344,7 @@ var LOGOS = {"potere": "data:image/webp;base64,UklGRoYDAABXRUJQVlA4IHoDAADQEgCdA
 </script>
 <script>
 /* ===== DADOS: edite aqui sem mexer no HTML ===== */
-var CONTATO = {nome:"Raquel Maciel", insta:"raquelmacielugc", email:"raquelmaciel709@gmail.com", whats:"5511951086172"};
+var CONTATO = {nome:"Raquel Maciel", insta:"raquelmacielugc", tiktok:"raquel.maciel.ugc", email:"raquelmaciel709@gmail.com", whats:"5511951086172"};
 
 /* Marcas da faixa da capa. LOGO: nome da logo já embutida no arquivo (ex.: "dove") ou caminho de uma imagem (ex.: "logos/marca.png"). Vazio = mostra o nome */
 var MARCAS = [
@@ -489,7 +490,8 @@ $("tests").innerHTML = DEPOIMENTOS.map(function(d){return '<blockquote class="rv
 $("wa").href = "https://wa.me/"+CONTATO.whats;
 $("mail").href = "mailto:"+CONTATO.email;
 $("ig").href = "https://www.instagram.com/"+CONTATO.insta+"/";
-$("social").innerHTML = '<li><a href="https://www.instagram.com/'+CONTATO.insta+'/" target="_blank" rel="noopener">Instagram @'+CONTATO.insta+'</a></li><li><a href="https://wa.me/'+CONTATO.whats+'" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:'+CONTATO.email+'">E-mail</a></li>';
+$("tt").href = "https://www.tiktok.com/@"+CONTATO.tiktok;
+$("social").innerHTML = '<li><a href="https://www.instagram.com/'+CONTATO.insta+'/" target="_blank" rel="noopener">Instagram @'+CONTATO.insta+'</a></li><li><a href="https://www.tiktok.com/@'+CONTATO.tiktok+'" target="_blank" rel="noopener">TikTok @'+CONTATO.tiktok+'</a></li><li><a href="https://wa.me/'+CONTATO.whats+'" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:'+CONTATO.email+'">E-mail</a></li>';
 $("year").textContent = new Date().getFullYear();
 
 /* contagem regressiva: calcula na hora que a página abre e de novo a cada meia-noite */
