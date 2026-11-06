@@ -712,7 +712,7 @@ var obsMet = new IntersectionObserver(function(es){
 /* card de captura: 7 segundos, uma vez por visita */
 var ov = $("ov");
 function fecha(){ov.classList.remove("open")}
-function abre(){ov.classList.add("open"); $("cn").focus(); try{sessionStorage.setItem("midiakit","1")}catch(e){}}
+function abre(){if($("vp").classList.contains("open")){setTimeout(abre,4000);return} ov.classList.add("open"); $("cn").focus(); try{sessionStorage.setItem("midiakit","1")}catch(e){}}
 var visto = false; try{visto = sessionStorage.getItem("midiakit")==="1"}catch(e){}
 if(!visto) setTimeout(abre,7000);
 $("x").addEventListener("click",fecha);
