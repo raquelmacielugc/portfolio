@@ -612,12 +612,13 @@ function contagem(){
 contagem();
 document.addEventListener("visibilitychange",function(){if(!document.hidden) contagem()});
 
-/* player: cards e destaques do YouTube abrem o vídeo dentro do site; o link normal continua como reserva */
+/* player: cards e destaques do YouTube abrem o vídeo dentro do site; o link normal continua como reserva.
+   Começa sem som porque os celulares só deixam o vídeo tocar sozinho assim; a pessoa toca no alto-falante para ouvir */
 var vp = $("vp"), vpVolta = null;
 function abreVideo(link,titulo){
   var id = ytId(link); if(!id) return false;
   vpVolta = document.activeElement;
-  $("vpF").innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&playsinline=1&rel=0" title="'+titulo.replace(/"/g,"&quot;")+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+  $("vpF").innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&mute=1&playsinline=1&rel=0&loop=1&playlist='+id+'" title="'+titulo.replace(/"/g,"&quot;")+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
   $("vpT").textContent = titulo; $("vpL").href = link;
   vp.classList.add("open"); $("vpX").focus();
   return true;
