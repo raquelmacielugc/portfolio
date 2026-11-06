@@ -123,6 +123,9 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;paddi
 a.work{display:block;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s}
 a.work:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
 .thumb{position:relative}
+.selos{position:absolute;left:.6rem;top:.6rem;z-index:2;display:flex;flex-wrap:wrap;gap:.35rem}
+.selos span{background:var(--w);color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:.05rem .55rem;font-size:.72rem;font-weight:700;line-height:1.5}
+.selos .tipo{background:var(--ink);color:var(--w)}
 /* legenda por cima do vídeo: marca em destaque e o nicho numa pílula logo abaixo */
 .thumb img,.thumb .ph{border-bottom:0}
 .cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:3rem .85rem .85rem;background:linear-gradient(transparent,rgba(29,11,16,.85));color:#fff}
@@ -141,6 +144,14 @@ a.work:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
 .card .n{display:inline-block;background:var(--m);border:2px solid var(--ink);font-family:'Archivo Black',sans-serif;padding:.1rem .6rem;margin-bottom:.8rem}
 .card h3{font-size:1.2rem;margin-bottom:.5rem}
 .card p{font-size:.95rem}
+.srv-intro{max-width:46rem;margin:-1rem 0 1.8rem;font-weight:600}
+.card{display:flex;flex-direction:column}
+.card-top{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;margin-bottom:.8rem}
+.card-top .n{margin-bottom:0}
+.srv-tipo{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--ink);color:var(--w);border-radius:999px;padding:.15rem .65rem}
+.srv-tipo.publi{background:var(--c)}
+.orc{margin-top:auto;padding-top:.9rem;font-weight:700;color:var(--c);text-decoration:none}
+.orc:hover{text-decoration:underline}
 /* numeros */
 .mets{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-bottom:2.4rem}
 .met{background:var(--c);color:var(--w);border:3px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink);padding:1.2rem;text-align:center}
@@ -156,10 +167,13 @@ blockquote footer b{display:block}
 .contact{display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:start}
 form{background:var(--w);border:3px solid var(--ink);border-radius:18px;box-shadow:7px 7px 0 var(--ink);padding:1.5rem}
 label{display:block;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.35rem}
-input,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:3px solid var(--ink);padding:.7rem;margin-bottom:1rem}
+input,textarea,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:3px solid var(--ink);padding:.7rem;margin-bottom:1rem}
 textarea{min-height:130px;resize:vertical}
 .ok{display:none;background:var(--m);border:3px solid var(--ink);padding:1rem;font-weight:700;margin-top:1rem}
 .ok.show{display:block}
+.opc{text-transform:none;letter-spacing:0;font-weight:600;opacity:.7}
+.prazo{font-size:.88rem;font-weight:600;margin:-.2rem 0 1rem}
+.copiar{font:inherit;font-weight:700;background:none;border:0;color:var(--ink);text-decoration:underline;cursor:pointer;justify-self:start;padding:.2rem 0}
 .chan{display:grid;gap:1rem}
 .chan p{margin-bottom:.4rem}
 /* rodape */
@@ -169,6 +183,11 @@ footer.site ul{list-style:none;display:flex;justify-content:center;flex-wrap:wra
 /* captura */
 .ov{position:fixed;inset:0;background:rgba(29,11,16,.78);display:none;align-items:center;justify-content:center;padding:1rem;z-index:100}
 .ov.open{display:flex}
+.vp-box{position:relative;width:min(400px,100%);background:var(--bg);border:3px solid var(--ink);border-radius:18px;box-shadow:9px 9px 0 var(--c);padding:3.2rem .9rem .9rem}
+.vp-frame{aspect-ratio:9/16;max-height:72vh;margin:0 auto;border-radius:12px;overflow:hidden;background:#000}
+.vp-frame iframe{width:100%;height:100%;border:0;display:block}
+.vp-info{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-top:.8rem}
+.vp-info a{font-weight:700;font-size:.88rem;color:var(--c)}
 .pop{background:var(--bg);border:3px solid var(--ink);border-radius:18px;box-shadow:9px 9px 0 var(--c);padding:2rem 1.5rem 1.5rem;width:min(440px,100%);position:relative;max-height:92vh;overflow:auto}
 .pop h2{font-size:1.8rem;margin-bottom:.6rem}
 .pop p{margin-bottom:1rem}
@@ -300,6 +319,7 @@ section{padding:3.2rem 0}
 <section id="servicos">
   <div class="wrap">
     <h2 class="rv">Como eu te <mark>ajudo</mark>?</h2>
+    <p class="srv-intro rv">No UGC, eu gravo e a sua marca usa o conteúdo onde quiser, no anúncio, na loja ou nas redes. Na publi, o vídeo vai no meu perfil, para a minha audiência.</p>
     <div class="srv" id="srv"></div>
   </div>
 </section>
@@ -321,8 +341,17 @@ section{padding:3.2rem 0}
         <input id="nome" name="nome" type="text" autocomplete="name" required>
         <label for="email">E-mail</label>
         <input id="email" name="email" type="email" autocomplete="email" required>
-        <label for="msg">Mensagem</label>
-        <textarea id="msg" name="msg" required></textarea>
+        <label for="marca">Marca / empresa</label>
+        <input id="marca" name="marca" type="text" autocomplete="organization">
+        <label for="servico">O que você precisa</label>
+        <select id="servico" name="servico">
+          <option value="">Escolhe um formato</option>
+        </select>
+        <label for="orcamento">Orçamento estimado <span class="opc">(opcional)</span></label>
+        <input id="orcamento" name="orcamento" type="text" placeholder="Ex.: R$ 500">
+        <label for="msg">Conta sobre o projeto</label>
+        <textarea id="msg" name="msg" required placeholder="Produto, objetivo da campanha, prazo..."></textarea>
+        <p class="prazo">Prazo de entrega: até 72 horas úteis depois do roteiro aprovado e do produto recebido.</p>
         <button class="btn" type="submit">Enviar mensagem</button>
         <p class="ok" id="ok" role="status" tabindex="-1">Pronto! Agora é só enviar a mensagem no WhatsApp que abriu.</p>
       </form>
@@ -333,6 +362,7 @@ section{padding:3.2rem 0}
       <a class="btn alt" id="mail" href="#">E-mail</a>
       <a class="btn alt" id="ig" href="#" target="_blank" rel="noopener">Instagram</a>
       <a class="btn alt" id="tt" href="#" target="_blank" rel="noopener">TikTok</a>
+      <button class="copiar" id="copiar" type="button">Copiar e-mail</button>
     </div>
   </div>
 </section>
@@ -352,6 +382,15 @@ section{padding:3.2rem 0}
     <div class="thin" style="border:0;justify-content:center"><span>Mogi das Cruzes</span><span>UGC Creator</span><span id="year"></span></div>
   </div>
 </footer>
+
+<!-- PLAYER: os vídeos do YouTube abrem aqui, sem sair do portfólio -->
+<div class="ov" id="vp">
+  <div class="vp-box" role="dialog" aria-modal="true" aria-labelledby="vpT">
+    <button class="x" id="vpX" aria-label="Fechar vídeo">X</button>
+    <div class="vp-frame" id="vpF"></div>
+    <div class="vp-info"><b id="vpT"></b><a id="vpL" href="#" target="_blank" rel="noopener">Abrir no YouTube ↗</a></div>
+  </div>
+</div>
 
 <!-- CARD DE CAPTURA: aparece 1 vez por visita, depois de 7 segundos -->
 <div class="ov" id="ov">
@@ -408,6 +447,9 @@ var DESTAQUES = [
   {link:"https://www.youtube.com/shorts/mNudqIhFZ1g", capa:"", numero:"+8M", rotulo:"views no reels", titulo:"Sacola surpresa O Boticário", contexto:"O Boticário, beleza."}
 ];
 
+/* Selos dos vídeos: ano que aparece em todos (cada vídeo pode ter o seu com ano:"2025"). Tipo opcional em cada vídeo: tipo:"UGC", "Publi Post" ou "Publi Post + UGC" */
+var ANO_PADRAO = "2026";
+
 /* Nichos (botões de filtro) */
 var NICHOS = ["Beleza","Skincare","Casa e decoração","Fitness","Tech","Moda"];
 /* ícone que aparece ao lado do nome de cada nicho */
@@ -457,13 +499,14 @@ var GALERIA = [
 var BLACK_FRIDAY = {ano:2026, mes:11, dia:27};
 
 /* Serviços */
+/* Serviços: tipo = UGC (a marca usa o conteúdo) ou PUBLI (vai no meu perfil); destino = para onde o conteúdo vai */
 var SERVICOS = [
-  {t:"Vídeo UGC", d:"Vídeo natural com o seu produto, roteirizado para vender."},
-  {t:"Corte para anúncio", d:"Versões curtas e ajustadas para rodar como anúncio."},
-  {t:"Fotos do produto", d:"Fotos com cara de dia a dia, prontas para feed e loja."},
-  {t:"Unboxing", d:"Abertura do produto com primeira impressão real."},
-  {t:"Publicação no meu perfil", d:"Seu produto no meu Instagram, com a minha audiência."},
-  {t:"Pacote mensal", d:"Conteúdo todo mês, com rotina combinada e preço melhor."}
+  {t:"Vídeo UGC", tipo:"UGC", destino:"vai pro seu anúncio ou loja", d:"Vídeo natural com o seu produto, roteirizado para vender."},
+  {t:"Corte para anúncio", tipo:"UGC", destino:"vai pro seu anúncio", d:"Versões curtas e ajustadas para rodar como anúncio."},
+  {t:"Fotos do produto", tipo:"UGC", destino:"vai pro seu feed e loja", d:"Fotos com cara de dia a dia, prontas para feed e loja."},
+  {t:"Unboxing", tipo:"UGC", destino:"vai pro seu anúncio ou loja", d:"Abertura do produto com primeira impressão real."},
+  {t:"Publicação no meu perfil", tipo:"PUBLI", destino:"vai no meu perfil", d:"Seu produto no meu Instagram, com a minha audiência."},
+  {t:"Pacote mensal", tipo:"UGC", destino:"conteúdo todo mês", d:"Conteúdo todo mês, com rotina combinada e preço melhor."}
 ];
 
 /* Depoimentos: nome = quem falou (marca ou pessoa); emp = opcional, aparece embaixo do nome (vazio = não aparece) */
@@ -505,7 +548,8 @@ function cardHTML(t){
   var bloco = t.img ? '<img src="'+t.img+'" alt="'+t.titulo+' para '+t.marca+'" loading="lazy" style="aspect-ratio:4/5;object-fit:cover">' : yt ? '<img src="https://i.ytimg.com/vi/'+yt+'/oardefault.jpg" onload="capaYT(this)" onerror="capaYT(this,1)" data-yt="'+yt+'" alt="Capa do vídeo: '+t.titulo+'" loading="lazy" style="display:block;width:100%;aspect-ratio:4/5;object-fit:cover;color:transparent;background:linear-gradient(135deg,'+grad+')">' : '<div class="ph" style="background:linear-gradient(135deg,'+grad+')" role="img" aria-label="Espaço reservado para '+t.titulo+'">'+(video?'':'foto ou vídeo 4:5')+'</div>';
   var nome = (t.marca && t.marca!=="Sua marca") ? t.marca+(t.desc?" - "+t.desc:"") : t.titulo;
   var legenda = video ? '<div class="cap"><b>'+nome+'</b><span class="pill">'+t.nicho+'</span></div>' : '<div class="t"><b>'+t.titulo+'</b><span>'+t.nicho+', '+t.marca+'</span></div>';
-  var corpo = video ? '<div class="thumb">'+bloco+'<span class="play" aria-hidden="true"></span>'+legenda+'</div>' : bloco+legenda;
+  var selos = '<div class="selos"><span>'+(t.ano||ANO_PADRAO)+'</span>'+(t.tipo?'<span class="tipo">'+t.tipo+'</span>':'')+'</div>';
+  var corpo = video ? '<div class="thumb">'+bloco+selos+'<span class="play" aria-hidden="true"></span>'+legenda+'</div>' : bloco+legenda;
   return video ? '<a class="work" href="'+t.link+'" target="_blank" rel="noopener" aria-label="Abrir o vídeo: '+nome+', '+t.nicho+'">'+corpo+'</a>' : '<article class="work">'+corpo+'</article>';
 }
 /* um bloco por nicho: título com ícone e quantidade, e os vídeos numa fileira que arrasta para o lado */
@@ -528,17 +572,26 @@ $("gallery").innerHTML = NICHOS.map(function(n){
 $("filters").innerHTML = NICHOS.filter(function(n){return TRABALHOS.some(function(t){return t.nicho===n})}).map(function(n){return '<a href="#'+idNicho(n)+'">'+(ICONES[n]||"")+" "+n+'</a>'}).join("");
 
 $("gal").innerHTML = GALERIA.map(function(g){return '<img src="'+(FOTOS[g.foto]||g.foto)+'" alt="'+g.alt+'" width="'+g.w+'" height="'+g.h+'" loading="lazy">'}).join("");
-$("srv").innerHTML = SERVICOS.map(function(s,i){return '<div class="card rv"><span class="n">0'+(i+1)+'</span><h3>'+s.t+'</h3><p>'+s.d+'</p></div>'}).join("");
+$("srv").innerHTML = SERVICOS.map(function(s,i){return '<div class="card rv"><div class="card-top"><span class="n">0'+(i+1)+'</span><span class="srv-tipo'+(s.tipo==="PUBLI"?" publi":"")+'">'+s.tipo+' · '+s.destino+'</span></div><h3>'+s.t+'</h3><p>'+s.d+'</p><a class="orc" href="#contato" data-servico="'+s.t+'">Pedir orçamento →</a></div>'}).join("");
+/* "Pedir orçamento" já escolhe o serviço no formulário */
+$("srv").addEventListener("click",function(e){var a = e.target.closest(".orc"); if(a) $("servico").value = a.dataset.servico});
 $("mets").innerHTML = METRICAS.map(function(m){return '<div class="met rv"><b>'+metricaHTML(m)+'</b><span>'+m.rotulo+'</span></div>'}).join("");
 $("tests").innerHTML = DEPOIMENTOS.map(function(d){return '<blockquote class="rv"><p>“'+d.txt+'”</p><footer><b>'+d.nome+'</b>'+d.emp+'</footer></blockquote>'}).join("");
 
 /* contatos */
+$("servico").innerHTML += SERVICOS.map(function(s){return '<option>'+s.t+'</option>'}).join("")+'<option>Mais de um formato</option><option>Ainda não sei</option>';
 $("wa").href = "https://wa.me/"+CONTATO.whats;
 $("mail").href = "mailto:"+CONTATO.email;
 $("ig").href = "https://www.instagram.com/"+CONTATO.insta+"/";
 $("tt").href = "https://www.tiktok.com/@"+CONTATO.tiktok;
 $("social").innerHTML = '<li><a href="https://www.instagram.com/'+CONTATO.insta+'/" target="_blank" rel="noopener">Instagram @'+CONTATO.insta+'</a></li><li><a href="https://www.tiktok.com/@'+CONTATO.tiktok+'" target="_blank" rel="noopener">TikTok @'+CONTATO.tiktok+'</a></li><li><a href="https://wa.me/'+CONTATO.whats+'" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:'+CONTATO.email+'">E-mail</a></li>';
 $("year").textContent = new Date().getFullYear();
+$("copiar").addEventListener("click",function(){
+  var b = this;
+  function feito(){b.textContent = "E-mail copiado!"; setTimeout(function(){b.textContent = "Copiar e-mail"},2000)}
+  if(navigator.clipboard) navigator.clipboard.writeText(CONTATO.email).then(feito,function(){prompt("Copie o e-mail:",CONTATO.email)});
+  else prompt("Copie o e-mail:",CONTATO.email);
+});
 
 /* contagem regressiva: calcula na hora que a página abre e de novo a cada meia-noite */
 var tContagem;
@@ -558,6 +611,30 @@ function contagem(){
 }
 contagem();
 document.addEventListener("visibilitychange",function(){if(!document.hidden) contagem()});
+
+/* player: cards e destaques do YouTube abrem o vídeo dentro do site; o link normal continua como reserva */
+var vp = $("vp"), vpVolta = null;
+function abreVideo(link,titulo){
+  var id = ytId(link); if(!id) return false;
+  vpVolta = document.activeElement;
+  $("vpF").innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&playsinline=1&rel=0" title="'+titulo.replace(/"/g,"&quot;")+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+  $("vpT").textContent = titulo; $("vpL").href = link;
+  vp.classList.add("open"); $("vpX").focus();
+  return true;
+}
+function fechaVideo(){
+  if(!vp.classList.contains("open")) return;
+  vp.classList.remove("open"); $("vpF").innerHTML = "";
+  if(vpVolta) vpVolta.focus();
+}
+document.addEventListener("click",function(e){
+  var a = e.target.closest("a.work, a.hl"); if(!a || e.ctrlKey || e.metaKey || e.shiftKey) return;
+  var cap = a.querySelector(".cap b, h3");
+  if(abreVideo(a.href, cap ? cap.textContent : "Vídeo")) e.preventDefault();
+});
+$("vpX").addEventListener("click",fechaVideo);
+vp.addEventListener("click",function(e){if(e.target===vp) fechaVideo()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape") fechaVideo()});
 
 /* barra de baixo: marca a seção que está na tela */
 var abas = document.querySelectorAll(".tabbar a");
@@ -590,7 +667,11 @@ function abreWhats(txt){
 $("form").addEventListener("submit",function(e){
   e.preventDefault();
   if(!this.checkValidity()){this.reportValidity();return}
-  var txt = "Oi, Raquel! Vim pelo seu portfólio.\n\nNome: "+$("nome").value+"\nE-mail: "+$("email").value+"\n\n"+$("msg").value;
+  var txt = "Oi, Raquel! Vim pelo seu portfólio.\n\nNome: "+$("nome").value+"\nE-mail: "+$("email").value
+    +($("marca").value?"\nMarca: "+$("marca").value:"")
+    +($("servico").value?"\nO que preciso: "+$("servico").value:"")
+    +($("orcamento").value?"\nOrçamento estimado: "+$("orcamento").value:"")
+    +"\n\nSobre o projeto:\n"+$("msg").value;
   abreWhats(txt);
   $("ok").classList.add("show"); $("ok").focus(); this.reset();
 });
